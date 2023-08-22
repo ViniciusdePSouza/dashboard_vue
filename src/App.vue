@@ -27,8 +27,8 @@
       <template #append>
         <v-menu>
           <template #activator="{ props }">
-            <v-btn icon class="mr-2">
-              <v-badge dot>
+            <v-btn icon class="mr-2" v-bind="props">
+              <v-badge dot >
                 <v-icon icon="mdi-bell-outline"></v-icon>
               </v-badge>
             </v-btn>
