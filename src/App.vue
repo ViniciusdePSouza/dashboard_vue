@@ -28,7 +28,7 @@
         <v-menu>
           <template #activator="{ props }">
             <v-btn icon class="mr-2" v-bind="props">
-              <v-badge dot >
+              <v-badge dot>
                 <v-icon icon="mdi-bell-outline"></v-icon>
               </v-badge>
             </v-btn>
@@ -91,7 +91,43 @@
 
               <v-dialog width="600px" v-model="isDialogOpen">
                 <v-card>
-                  <v-card-text> fdashoiudhdoiufa </v-card-text>
+                  <v-card-title>Adicionar Usuário</v-card-title>
+                  <v-card-text>
+                    <v-row>
+                      <v-col>
+                        <v-text-field
+                          label="Nome"
+                          variant="outlined"
+                          :rules="nameRules"
+                        />
+                      </v-col>
+                      <v-col>
+                        <v-text-field
+                          label="Email"
+                          variant="outlined"
+                          :rules="emailRules"
+                        />
+                      </v-col>
+                    </v-row>
+
+                    <v-select
+                      label="Cargo"
+                      variant="outlined"
+                      :items="['Admin', 'Gerente', 'Convidado']"
+                      :rules="selectRules"
+                    />
+                  </v-card-text>
+
+                  <v-card-actions>
+                    <v-spacer />
+                    <v-btn variant="tonal" color="success">Salvar</v-btn>
+                    <v-btn
+                      variant="tonal"
+                      color="text"
+                      @click="isDialogOpen = false"
+                      >Cancelar</v-btn
+                    >
+                  </v-card-actions>
                 </v-card>
               </v-dialog>
             </v-card-title>
@@ -108,7 +144,11 @@
               <tr>
                 <td>Fulano</td>
                 <td>fulano@gmail.com</td>
-                <td>Adm</td>
+                <td>
+                  <v-chip color="primary" variant="outlined" size="small">
+                    Admin
+                  </v-chip>
+                </td>
                 <td>
                   <v-btn variant="tonal" color="primary"> Editar </v-btn>
                 </td>
@@ -116,7 +156,11 @@
               <tr>
                 <td>Beltrano</td>
                 <td>beltrano@gmail.com</td>
-                <td>Gerente</td>
+                <td>
+                  <v-chip color="tonal" variant="outlined" size="small">
+                    Gerente
+                  </v-chip>
+                </td>
                 <td>
                   <v-btn variant="tonal" color="primary"> Editar </v-btn>
                 </td>
@@ -124,7 +168,11 @@
               <tr>
                 <td>Ciclano</td>
                 <td>ciclano@gmail.com</td>
-                <td>Convidado</td>
+                <td>
+                  <v-chip variant="outlined" size="small">
+                    Convidado
+                  </v-chip>
+                </td>
                 <td>
                   <v-btn variant="tonal" color="primary"> Editar </v-btn>
                 </td>
@@ -255,8 +303,30 @@
 </template>
 
 <script setup>
-  import { ref } from "vue";
-  const isDrawerOpen = ref(false);
-  const groupValue = ref(false);
-  const isDialogOpen = ref(false);
+import { ref } from "vue";
+const isDrawerOpen = ref(false);
+const groupValue = ref(false);
+const isDialogOpen = ref(false);
+const emailRules = [
+  (value) => {
+    if (value) return true;
+
+    return "Email obrigatório";
+  },
+];
+const nameRules = [
+  (value) => {
+    if (value) return true;
+
+    return "Nome obrigatório";
+  },
+];
+
+const selectRules = [
+  (value) => {
+    if (value) return true;
+
+    return "Selecione um cargo";
+  },
+];
 </script>
