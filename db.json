@@ -1,0 +1,13 @@
+{
+    "posts": [
+      { "id": 1, "title": "Top 10 Lugares em Londres" },
+      { "id": 2, "title": "Top 10 Lugares em Madrid" },
+      { "id": 3, "title": "Top 10 Lugares em Paris" },
+      { "id": 4, "title": "Top 10 Lugares em    Amsterdã" }
+    ],
+    "users": [
+        { "name": "Vinícius", "role": "Admin", "email": "vini@gmail.com"  },
+        { "name": "Duda", "role": "Gerente", "email": "duda@gmail.com"  },
+        { "name": "Junim", "role": "Convidado", "email": "junim@gmail.com"  }
+]
+  }

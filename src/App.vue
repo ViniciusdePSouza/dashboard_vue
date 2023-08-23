@@ -138,42 +138,19 @@
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Cargo</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Fulano</td>
-                <td>fulano@gmail.com</td>
+              <tr v-for="user in allUsers" :key="user.id">
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
                 <td>
                   <v-chip color="primary" variant="outlined" size="small">
-                    Admin
+                    {{ user.role }}
                   </v-chip>
                 </td>
-                <td>
-                  <v-btn variant="tonal" color="primary"> Editar </v-btn>
-                </td>
-              </tr>
-              <tr>
-                <td>Beltrano</td>
-                <td>beltrano@gmail.com</td>
-                <td>
-                  <v-chip color="tonal" variant="outlined" size="small">
-                    Gerente
-                  </v-chip>
-                </td>
-                <td>
-                  <v-btn variant="tonal" color="primary"> Editar </v-btn>
-                </td>
-              </tr>
-              <tr>
-                <td>Ciclano</td>
-                <td>ciclano@gmail.com</td>
-                <td>
-                  <v-chip variant="outlined" size="small">
-                    Convidado
-                  </v-chip>
-                </td>
-                <td>
+                <td class="border-top">
                   <v-btn variant="tonal" color="primary"> Editar </v-btn>
                 </td>
               </tr>
@@ -303,10 +280,14 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { api } from "@/services/api.js";
+
+const allUsers = ref([]);
 const isDrawerOpen = ref(false);
 const groupValue = ref(false);
 const isDialogOpen = ref(false);
+
 const emailRules = [
   (value) => {
     if (value) return true;
@@ -314,6 +295,7 @@ const emailRules = [
     return "Email obrigatório";
   },
 ];
+
 const nameRules = [
   (value) => {
     if (value) return true;
@@ -329,4 +311,16 @@ const selectRules = [
     return "Selecione um cargo";
   },
 ];
+
+onMounted(async () => {
+  try {
+    const { data } = await api.get("/users");
+
+    allUsers.value = data;
+  } catch (e) {
+    console.log(e);
+  }
+});
 </script>
+
+<style></style>
